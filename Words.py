@@ -95,18 +95,19 @@ class WordGeneratorClient:
     # check for duplicate words 
     def generateSmallWordPack(self, packName, categories):
         file = open(packName, "w")
-        numWords = int(25/len(categories))
-        reminder = 25%len(categories)
+        # numWords = int(25/len(categories))
+        # reminder = int(25%len(categories))
         ranWords = []
 
         for category in categories:
             wordList = self.wordBank.getSelectedWordList(category)  
-            ranWords.extend(random.choices(wordList, k=numWords))
-            
-            if reminder > 0:
-                randomNumber = random.randint(1, reminder)
-                ranWords.extend(random.choices(wordList, k=randomNumber))
-                reminder -= randomNumber
+            ranWords.extend(wordList)
+        
+        ranWords = random.choices(ranWords, k=25)
+            # if reminder > 0:
+            #     randomNumber = random.randint(1, reminder)
+            #     ranWords.extend(random.choices(wordList, k=randomNumber))
+            #     reminder -= randomNumber
         
         for item in ranWords:
             file.write(item.getWord())
@@ -115,7 +116,16 @@ class WordGeneratorClient:
     # 400 words Pack Name is just the name of the txt file
     def generateLargeWordPack(self, packName, categories):
         file = open(packName, "w")
+        ranWords = []
 
+        for category in categories:
+            wordList = self.wordBank.getSelectedWordList(category)  
+            ranWords.extend(wordList)
+        
+        ranWords = random.choices(ranWords, k=400)
+        
+        for item in ranWords:
+            file.write(item.getWord())
         file.close()
 
 
@@ -127,7 +137,7 @@ class WordGeneratorClient:
 
 word = WordGeneratorClient()
 word.loadWords()
-word.generateSmallWordPack("5words.txt", [Anatomy(), People(), Animal(), Place(), Thing()])
+word.generateLargeWordPack("5words.txt", [Anatomy(), People(), Animal(), Place(), Thing()])
 # word.saveWords()
 # list = word.wordBank.getSelectedWordList(People())
 # for item in list:
