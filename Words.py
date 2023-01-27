@@ -82,7 +82,12 @@ class WordGeneratorClient:
     def saveWords(self):
 
         file = open("allWords", "w")
-        file.write(str(self.wordBank.wordPool))
+        for key, value in self.wordBank.wordPool.items():
+            key = "*" + key
+            file.write(key + "\n")
+            for item in value:
+                file.write(item.getWord())
+
         file.close()
 
     # 25 words Pack Name is just the name of the txt file
@@ -102,6 +107,7 @@ class WordGeneratorClient:
 
 word = WordGeneratorClient()
 word.loadWords()
+word.saveWords()
 list = word.wordBank.getSelectedWordList(People())
 for item in list:
     print(item.getWord())
