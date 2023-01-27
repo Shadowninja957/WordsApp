@@ -92,20 +92,24 @@ class WordGeneratorClient:
         file.close()
 
     # 25 words Pack Name is just the name of the txt file
+    # check for duplicate words 
     def generateSmallWordPack(self, packName, categories):
         file = open(packName, "w")
-        numWords = 25/len(categories)
+        numWords = int(25/len(categories))
         reminder = 25%len(categories)
         ranWords = []
 
         for category in categories:
-            wordList = self.wordBank.getSelectedWordList(category.getCategory())  
-            ranWords.append(random.choices(wordList, k=numWords))
+            wordList = self.wordBank.getSelectedWordList(category)  
+            ranWords.extend(random.choices(wordList, k=numWords))
             
             if reminder > 0:
                 randomNumber = random.randint(1, reminder)
-                ranWords.append(random.choices(wordList, k=randomNumber))
+                ranWords.extend(random.choices(wordList, k=randomNumber))
                 reminder -= randomNumber
+        
+        for item in ranWords:
+            file.write(item.getWord())
         file.close()
 
     # 400 words Pack Name is just the name of the txt file
@@ -123,7 +127,7 @@ class WordGeneratorClient:
 
 word = WordGeneratorClient()
 word.loadWords()
-# word.generateSmallWordPack("5words.txt", [])
+word.generateSmallWordPack("5words.txt", [Anatomy(), People(), Animal(), Place(), Thing()])
 # word.saveWords()
 # list = word.wordBank.getSelectedWordList(People())
 # for item in list:
