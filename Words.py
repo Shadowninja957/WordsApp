@@ -1,4 +1,5 @@
 from Categories import *
+import random
 
 class Word:
 
@@ -92,11 +93,26 @@ class WordGeneratorClient:
 
     # 25 words Pack Name is just the name of the txt file
     def generateSmallWordPack(self, packName, categories):
-        pass
+        file = open(packName, "w")
+        numWords = 25/len(categories)
+        reminder = 25%len(categories)
+        ranWords = []
+
+        for category in categories:
+            wordList = self.wordBank.getSelectedWordList(category.getCategory())  
+            ranWords.append(random.choices(wordList, k=numWords))
+            
+            if reminder > 0:
+                randomNumber = random.randint(1, reminder)
+                ranWords.append(random.choices(wordList, k=randomNumber))
+                reminder -= randomNumber
+        file.close()
 
     # 400 words Pack Name is just the name of the txt file
     def generateLargeWordPack(self, packName, categories):
-        pass
+        file = open(packName, "w")
+
+        file.close()
 
 
 # c1 = WordBank()
@@ -107,7 +123,8 @@ class WordGeneratorClient:
 
 word = WordGeneratorClient()
 word.loadWords()
-word.saveWords()
-list = word.wordBank.getSelectedWordList(People())
-for item in list:
-    print(item.getWord())
+# word.generateSmallWordPack("5words.txt", [])
+# word.saveWords()
+# list = word.wordBank.getSelectedWordList(People())
+# for item in list:
+#     print(item.getWord())
