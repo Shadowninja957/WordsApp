@@ -1,10 +1,12 @@
 from Categories import *
+from Words import *
 import tkinter as tk
 
 # categories in a list use the index in listbox to identify the object categories in this list
 categories = [Anatomy(),People(),Animal(),Place(),Thing(),Movie(),TvShow(),Anime(),Cartoon(),Music(),Art(),Verb(),Adjective(),Food()
 ,Drink(),CustomWord(),LeagueOfLegends(),Apex(),Overwatch(),Color(),Astrology()]
 
+client = WordGeneratorClient()
 root = tk.Tk()
 
 canvas = tk.Canvas(root, width=600, height=400)
@@ -32,14 +34,18 @@ categoryBox.pack()
 
 '''Generator Words Button '''
 def generateWords1():
-    for item in categoryBox.curselection():
-        print(categories[int(item)].getCategory())
+   list = [categories[int(item)] for item in categoryBox.curselection()]
+   client.generateSmallWordPack(str(genEntry.get()), list)
 
 def generateWords2():
-    for item in categoryBox.curselection():
-        print(categories[int(item)].getCategory())
+    list = [categories[int(item)] for item in categoryBox.curselection()]
+    client.generateLargeWordPack(str(genEntry.get()), list)
 
 genButtonsFrame = tk.Frame(root)
+
+genEntry = tk.Entry(genButtonsFrame, bd=5)
+genEntry.pack(side="top")
+
 generateWords1_btn = tk.Button(genButtonsFrame, text="Generate 25 Words", command=generateWords1, fg="Red")
 generateWords1_btn.pack(side="left")
 
@@ -81,11 +87,15 @@ entryFrame.grid(column=1, row=5)
 
 '''Add words button'''
 def addWords():
-    print("Added Words!")
+    category=" "
+    for item in categoryBox.curselection():
+        category = categories[int(item)] 
+    client.wordBank.addWordsToCategory(entry.get(), category)
 
 addWordsbtn = tk.Button(root, text="Add Words", command=addWords)
 addWordsbtn.grid(column=1, row=6)
 
 '''Add words button'''
 
+client.loadWords()
 root.mainloop()

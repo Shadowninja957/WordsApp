@@ -77,7 +77,7 @@ class WordGeneratorClient:
                 word.strip()
                 wordP[category].append(Word(word))
             word = file.readline()
-
+                            
         file.close()
 
     def saveWords(self):
