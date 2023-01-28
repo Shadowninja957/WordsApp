@@ -13,7 +13,7 @@ instructions = tk.Label(root, text="Generate a .txt file with 25 words or 400 wo
 instructions.grid(column=1, row=1)
 '''TOP Labels'''
 
-'''Category Select '''
+'''Category Select Listbox'''
 listbox_frame = tk.Frame(root)
 scrollbar = tk.Scrollbar(listbox_frame, orient="vertical")
 
@@ -34,22 +34,34 @@ categoryBox.insert(12, "Ruby")
 scrollbar.config(command=categoryBox.yview())
 scrollbar.pack(side="right", fill="y")
 categoryBox.pack()
-listbox_frame.grid(column=1, row=3)
+listbox_frame.grid(column=1, row=2)
 '''Category Select '''
 
 '''Generator Words Button '''
 def generateWords1():
-    print("Generate 25 Words")
+    selections = []
+
+    for item in categoryBox.curselection():
+        selections.append(str(categoryBox.get(item)))
+
+    print(selections, "\n Generate 25 Words")
 
 def generateWords2():
-    print("Generate 400 Words")
+    selections = []
 
+    for item in categoryBox.curselection():
+        selections.append(str(categoryBox.get(item)))
 
-generateWords1_btn = tk.Button(root, text="Generate 25 Words", command=generateWords1)
-generateWords1_btn.grid(column=0, row=2)
+    print(selections, "\n Generate 400 Words")
 
-generateWords2_btn = tk.Button(root, text="Generate 400 Words", command=generateWords2)
-generateWords2_btn.grid(column=1, row=2)
+genButtonsFrame = tk.Frame(root)
+generateWords1_btn = tk.Button(genButtonsFrame, text="Generate 25 Words", command=generateWords1, fg="Red")
+generateWords1_btn.pack(side="left")
+
+generateWords2_btn = tk.Button(genButtonsFrame, text="Generate 400 Words", command=generateWords2, fg="Blue")
+generateWords2_btn.pack(side="right")
+
+genButtonsFrame.grid(column=1, row=3)
 '''Generator Words Button '''
 
 
