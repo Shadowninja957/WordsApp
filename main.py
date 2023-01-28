@@ -2,8 +2,8 @@ import tkinter as tk
 
 root = tk.Tk()
 
-canvas = tk.Canvas(root, width=600, height=300)
-canvas.grid(columnspan=3, rowspan=3)
+canvas = tk.Canvas(root, width=600, height=400)
+canvas.grid(columnspan=3, rowspan=5)
 
 '''TOP Labels'''
 appName = tk.Label(root, text="Words", font="Raleway")
@@ -14,15 +14,27 @@ instructions.grid(column=1, row=1)
 '''TOP Labels'''
 
 '''Category Select '''
-categoryBox = tk.Listbox(root, selectmode="MULTIPLE", yscrollcommand="")
+listbox_frame = tk.Frame(root)
+scrollbar = tk.Scrollbar(listbox_frame, orient="vertical")
+
+categoryBox = tk.Listbox(listbox_frame, selectmode="multiple", yscrollcommand=scrollbar.set)
 categoryBox.insert(1, "Python")
 categoryBox.insert(2, "Perl")
 categoryBox.insert(3, "C")
 categoryBox.insert(4, "PHP")
 categoryBox.insert(5, "JSP")
 categoryBox.insert(6, "Ruby")
+categoryBox.insert(7, "Python")
+categoryBox.insert(8, "Perl")
+categoryBox.insert(9, "C")
+categoryBox.insert(10, "PHP")
+categoryBox.insert(11, "JSP")
+categoryBox.insert(12, "Ruby")
 
-categoryBox.grid(column=1, row=3)
+scrollbar.config(command=categoryBox.yview())
+scrollbar.pack(side="right", fill="y")
+categoryBox.pack()
+listbox_frame.grid(column=1, row=3)
 '''Category Select '''
 
 '''Generator Words Button '''
