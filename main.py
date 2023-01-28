@@ -87,10 +87,11 @@ entryFrame.grid(column=1, row=5)
 
 '''Add words button'''
 def addWords():
-    category=" "
-    for item in categoryBox.curselection():
-        category = categories[int(item)] 
-    client.wordBank.addWordsToCategory(entry.get(), category)
+    print("Added")
+    # category=" "
+    # for item in categoryBox.curselection():
+    #     category = categories[int(item)] 
+    # client.wordBank.addWordsToCategory(entry.get(), category)
 
 addWordsbtn = tk.Button(root, text="Add Words", command=addWords)
 addWordsbtn.grid(column=1, row=6)
