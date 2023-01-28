@@ -32,20 +32,12 @@ categoryBox.pack()
 
 '''Generator Words Button '''
 def generateWords1():
-    selections = []
-
     for item in categoryBox.curselection():
-        selections.append(str(categoryBox.get(item)))
-
-    print(selections, "\n Generate 25 Words")
+        print(categories[int(item)].getCategory())
 
 def generateWords2():
-    selections = []
-
     for item in categoryBox.curselection():
-        selections.append(str(categoryBox.get(item)))
-
-    print(selections, "\n Generate 400 Words")
+        print(categories[int(item)].getCategory())
 
 genButtonsFrame = tk.Frame(root)
 generateWords1_btn = tk.Button(genButtonsFrame, text="Generate 25 Words", command=generateWords1, fg="Red")
