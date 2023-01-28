@@ -135,9 +135,9 @@ class WordGeneratorClient:
 # print(c1.checkDuplicate("Comet", Astrology()))
 
 
-word = WordGeneratorClient()
-word.loadWords()
-word.generateLargeWordPack("5words.txt", [Anatomy(), People(), Animal(), Place(), Thing()])
+# word = WordGeneratorClient()
+# word.loadWords()
+# word.generateLargeWordPack("5words.txt", [Anatomy(), People(), Animal(), Place(), Thing()])
 # word.saveWords()
 # list = word.wordBank.getSelectedWordList(People())
 # for item in list:
