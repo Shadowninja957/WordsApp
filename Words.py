@@ -72,9 +72,9 @@ class WordGeneratorClient:
         word = file.readline()
         while word is not "":
             if word.__contains__("*"):
-                category = word.strip("*").strip()
+                category = word.strip("*").strip().strip("\n")
             else:
-                word.strip()
+                word.strip().strip("\n")
                 wordP[category].append(Word(word))
             word = file.readline()
                             
@@ -87,7 +87,7 @@ class WordGeneratorClient:
             key = "*" + key
             file.write(key + "\n")
             for item in value:
-                file.write(item.getWord())
+                file.write(item.getWord()+"\n")
 
         file.close()
 

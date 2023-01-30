@@ -6,11 +6,13 @@ import tkinter as tk
 categories = [Anatomy(),People(),Animal(),Place(),Thing(),Movie(),TvShow(),Anime(),Cartoon(),Music(),Art(),Verb(),Adjective(),Food()
 ,Drink(),CustomWord(),LeagueOfLegends(),Apex(),Overwatch(),Color(),Astrology()]
 
+category = []
+
 client = WordGeneratorClient()
 root = tk.Tk()
 
-canvas = tk.Canvas(root, width=600, height=400)
-canvas.grid(columnspan=3, rowspan=6)
+canvas = tk.Canvas(root, width=600, height=500)
+canvas.grid(columnspan=3, rowspan=8)
 
 '''TOP Labels'''
 appName = tk.Label(root, text="Words", font="Raleway")
@@ -87,14 +89,29 @@ entryFrame.grid(column=1, row=5)
 
 '''Add words button'''
 def addWords():
-    print("Added")
-    # category=" "
-    # for item in categoryBox.curselection():
-    #     category = categories[int(item)] 
-    # client.wordBank.addWordsToCategory(entry.get(), category)
+    for item in categoryBox2.curselection():
+        category.append((categories[int(item)], entry.get()))
 
-addWordsbtn = tk.Button(root, text="Add Words", command=addWords)
-addWordsbtn.grid(column=1, row=6)
+def saveWords():
+    print("saved")
+    for item in category:
+        client.wordBank.addWordsToCategory(item[1], item[0])
+        client.saveWords()
+
+def deleteWords():
+    pass
+
+addWordsFrame = tk.Frame(root) 
+addWordsbtn = tk.Button(addWordsFrame, text="Add", command=addWords)
+addWordsbtn.pack(side="right")
+
+deleteWordsbtn = tk.Button(addWordsFrame, text="Delete", command=deleteWords)
+deleteWordsbtn.pack(side="left")
+
+addWordsFrame.grid(column=1, row=6)
+
+saveWordsbtn = tk.Button(root, text="Save", command=saveWords)
+saveWordsbtn.grid(column=2, row=7)
 
 '''Add words button'''
 
