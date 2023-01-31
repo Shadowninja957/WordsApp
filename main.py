@@ -1,6 +1,7 @@
 from Categories import *
 from Words import *
 import tkinter as tk
+import ttkbootstrap as ttk
 
 # categories in a list use the index in listbox to identify the object categories in this list
 categories = [Anatomy(),People(),Animal(),Place(),Thing(),Movie(),TvShow(),Anime(),Cartoon(),Music(),Art(),Verb(),Adjective(),Food()
@@ -9,7 +10,7 @@ categories = [Anatomy(),People(),Animal(),Place(),Thing(),Movie(),TvShow(),Anime
 category = []
 
 client = WordGeneratorClient()
-root = tk.Tk()
+root = ttk.Window(themename="darkly")
 
 canvas = tk.Canvas(root, width=600, height=500)
 canvas.grid(columnspan=3, rowspan=8)
@@ -45,16 +46,17 @@ def generateWords2():
 
 genButtonsFrame = tk.Frame(root)
 
+
 genEntry = tk.Entry(genButtonsFrame, bd=5)
 genEntry.pack(side="top")
 
-generateWords1_btn = tk.Button(genButtonsFrame, text="Generate 25 Words", command=generateWords1, fg="Red")
+generateWords1_btn = ttk.Button(genButtonsFrame, text="Generate 25", command=generateWords1, bootstyle="Warning")
 generateWords1_btn.pack(side="left")
 
-generateWords2_btn = tk.Button(genButtonsFrame, text="Generate 400 Words", command=generateWords2, fg="Blue")
+generateWords2_btn = ttk.Button(genButtonsFrame, text="Generate 400", command=generateWords2, bootstyle="Danger")
 generateWords2_btn.pack(side="right")
 
-genButtonsFrame.grid(column=1, row=3)
+genButtonsFrame.grid(column=2, row=2)
 '''Generator Words Button '''
 
 # Add words
