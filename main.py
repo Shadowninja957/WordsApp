@@ -19,8 +19,8 @@ canvas.grid(columnspan=3, rowspan=8)
 appName = tk.Label(root, text="Words", font="Raleway")
 appName.grid(column=1, row=0)
 
-instructions = tk.Label(root, text="Generate a .txt file with 25 words or 400 words", font="Raleway")
-instructions.grid(column=1, row=1)
+# instructions = tk.Label(root, text="Generate a .txt file with 25 words or 400 words", font="Raleway")
+# instructions.grid(column=1, row=1)
 '''TOP Labels'''
 
 # Generate Words
@@ -44,19 +44,25 @@ def generateWords2():
     list = [categories[int(item)] for item in categoryBox.curselection()]
     client.generateLargeWordPack(str(genEntry.get()), list)
 
-genButtonsFrame = tk.Frame(root)
+genEntryFrame = tk.Frame(root,width=200, height=400)
 
+packLabel = tk.Label(genEntryFrame, text="Pack Name")
+packLabel.grid(column=2, row=2, padx=5, pady=3, ipadx=10)
 
-genEntry = tk.Entry(genButtonsFrame, bd=5)
-genEntry.pack(side="top")
+genEntry = tk.Entry(genEntryFrame)
+genEntry.grid(column=2 ,row=3, padx=5, pady=3, ipadx=10)
 
-generateWords1_btn = ttk.Button(genButtonsFrame, text="Generate 25", command=generateWords1, bootstyle="Warning")
-generateWords1_btn.pack(side="left")
+genEntryFrame.grid(column=2, row=2, padx=10, pady=5)
 
-generateWords2_btn = ttk.Button(genButtonsFrame, text="Generate 400", command=generateWords2, bootstyle="Danger")
-generateWords2_btn.pack(side="right")
+genButtonsFrame = tk.Frame(root, width=200, height=500)
 
-genButtonsFrame.grid(column=2, row=2)
+generateWords1_btn = ttk.Button(genButtonsFrame, text="Generate 25", command=generateWords1)
+generateWords1_btn.grid(column=2, row=4, padx=5, pady=3, ipadx=10)
+
+generateWords2_btn = ttk.Button(genButtonsFrame, text="Generate 400", command=generateWords2)
+generateWords2_btn.grid(column=3, row=4, padx=5, pady=3, ipadx=10)
+
+genButtonsFrame.grid(column=2, row=3, padx=10, pady=5)
 '''Generator Words Button '''
 
 # Add words
@@ -73,20 +79,20 @@ scrollbar2.config(command=categoryBox2.yview())
 scrollbar2.pack(side="right", fill="y")
 categoryBox2.pack()
 
-listbox_frame.grid(column=1, row=2)
-listbox_frame2.grid(column=1, row=4)
+listbox_frame.grid(column=2, row=1)
+listbox_frame2.grid(column=1, row=1)
 '''Add words listbox'''
 
 '''Add words textfield'''
-entryFrame = tk.Frame(root)
+entryFrame = tk.Frame(root, width=200, height=500)
 
 entryLabel = tk.Label(entryFrame, text="Enter words")
-entryLabel.pack(side="top")
+entryLabel.grid(column=0, row=2)
 
 entry = tk.Entry(entryFrame, bd=5)
-entry.pack(side="bottom")
+entry.grid(column=0, row=3)
 
-entryFrame.grid(column=1, row=5)
+entryFrame.grid(column=1, row=2)
 '''Add words textfield'''
 
 '''Add words button'''
@@ -101,19 +107,21 @@ def saveWords():
         client.saveWords()
 
 def deleteWords():
-    pass
+    for item in category:
+        if entry.get() is item[1]:
+            item = None
 
-addWordsFrame = tk.Frame(root) 
+addWordsFrame = tk.Frame(root, width=300, height=500) 
 addWordsbtn = tk.Button(addWordsFrame, text="Add", command=addWords)
-addWordsbtn.pack(side="right")
+addWordsbtn.grid(column=0, row=4, padx=5, pady=3, ipadx=10)
 
 deleteWordsbtn = tk.Button(addWordsFrame, text="Delete", command=deleteWords)
-deleteWordsbtn.pack(side="left")
+deleteWordsbtn.grid(column=1, row=4, padx=5, pady=3, ipadx=10)
 
-addWordsFrame.grid(column=1, row=6)
+saveWordsbtn = tk.Button(addWordsFrame, text="Save", command=saveWords)
+saveWordsbtn.grid(column=0, row=5, padx=5, pady=3, ipadx=10)
 
-saveWordsbtn = tk.Button(root, text="Save", command=saveWords)
-saveWordsbtn.grid(column=2, row=7)
+addWordsFrame.grid(column=1, row=3, padx=10, pady=5)
 
 '''Add words button'''
 
