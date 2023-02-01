@@ -108,8 +108,9 @@ def saveWords():
 
 def deleteWords():
     for item in category:
-        if entry.get() is item[1]:
-            item = None
+        print(item[1])
+        if entry.get() == item[1]:
+            category.remove(item)
 
 addWordsFrame = tk.Frame(root, width=300, height=500) 
 addWordsbtn = tk.Button(addWordsFrame, text="Add", command=addWords)
