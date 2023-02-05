@@ -94,7 +94,7 @@ class WordGeneratorClient:
     # 25 words Pack Name is just the name of the txt file
     # check for duplicate words 
     def generateSmallWordPack(self, packName, categories):
-        file = open(packName, "w")
+        file = open(packName + ".txt", "w")
         # numWords = int(25/len(categories))
         # reminder = int(25%len(categories))
         ranWords = []
@@ -115,7 +115,7 @@ class WordGeneratorClient:
 
     # 400 words Pack Name is just the name of the txt file
     def generateLargeWordPack(self, packName, categories):
-        file = open(packName, "w")
+        file = open(packName + ".txt", "w")
         ranWords = []
 
         for category in categories:
